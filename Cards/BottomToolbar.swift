@@ -8,8 +8,17 @@
 import SwiftUI
 
 struct BottomToolbar: View {
+    
+    @Binding var modal: ToolbarSelection
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack{
+            Button(action: {
+                modal = .stickerModal
+            }, label: {
+                ToolbarButton()
+            })
+        }
     }
 }
 
@@ -25,5 +34,5 @@ struct ToolbarButton: View {
 }
 
 #Preview {
-    BottomToolbar()
+    BottomToolbar(modal: .constant(.stickerModal))
 }
