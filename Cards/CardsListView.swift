@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CardsListView: View {
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack {
                 ForEach(0..<10) { _ in
                     RoundedRectangle(cornerRadius: 15)
