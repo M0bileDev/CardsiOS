@@ -12,9 +12,7 @@ struct CardsListView: View {
         ScrollView(showsIndicators: false) {
             VStack {
                 ForEach(0..<10) { _ in
-                    RoundedRectangle(cornerRadius: 15)
-                        .foregroundStyle(.gray)
-                        .frame(width: 150, height: 250)
+                    CardThumbnail()
                 }
             }
         }
