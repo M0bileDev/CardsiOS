@@ -8,14 +8,22 @@
 import SwiftUI
 
 struct CardsListView: View {
+    
+    @State private var isPresented: Bool = false
+    
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
                 ForEach(0..<10) { _ in
                     CardThumbnail()
+                        .onTapGesture {
+                            isPresented.toggle()
+                        }
                 }
             }
-        }
+        }.fullScreenCover(isPresented: $isPresented, content: {
+            SingleCardView()
+        })
     }
 }
 
