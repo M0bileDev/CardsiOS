@@ -10,6 +10,7 @@ import SwiftUI
 struct SingleCardView: View {
 
     @Environment(\.dismiss) var dismiss
+    @State var currentModal: ToolbarSelection?
 
     var body: some View {
         NavigationStack {
@@ -23,11 +24,14 @@ struct SingleCardView: View {
                             }
                         }
                     )
+                    ToolbarItem(placement: .bottomBar) {
+                      BottomToolbar(modal: $currentModal)
+                    }
                 })
         }
     }
 }
 
 #Preview {
-    SingleCardView()
+    SingleCardView(currentModal: nil)
 }
