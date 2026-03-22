@@ -13,6 +13,17 @@ struct BottomToolbar: View {
     }
 }
 
+struct ToolbarButton: View {
+    var body: some View {
+        VStack {
+            Image(systemName: "heart.circle")
+                .font(.largeTitle)
+            Text("Stickers")
+        }
+        .padding(.top)
+    }
+}
+
 #Preview {
     BottomToolbar()
 }
