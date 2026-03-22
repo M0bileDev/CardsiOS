@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BottomToolbar: View {
     
-    @Binding var modal: ToolbarSelection
+    @Binding var modal: ToolbarSelection?
     
     var body: some View {
         HStack{
