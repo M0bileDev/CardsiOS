@@ -6,6 +6,8 @@
 //
 
 enum ToolbarSelection : CaseIterable, Identifiable {
-    var id = UUID()
+    var id: Int {
+      hashValue
+    }
     case photoModal, frameModal, stickerModal, textModal
 }
