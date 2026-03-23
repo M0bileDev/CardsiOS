@@ -13,12 +13,18 @@ struct BottomToolbar: View {
 
     var body: some View {
         HStack {
-            Button(
-                action: {
-                    modal = .stickerModal
-                },
-                label: {
-                    ToolbarButton()
+            ForEach(
+                ToolbarSelection.allCases,
+                id: \.self,
+                content: { selection in
+                    Button(
+                        action: {
+                            modal = selection
+                        },
+                        label: {
+                            ToolbarButton(modal: selection)
+                        }
+                    )
                 }
             )
         }
@@ -31,7 +37,7 @@ struct ToolbarButton: View {
             .photoModal: ("Photos", "photo"),
             .frameModal: ("Frames", "square.on.circle"),
             .stickerModal: ("Stickers", "heart.circle"),
-            .textModal: ("Text", "textFormat"),
+            .textModal: ("Text", "textformat"),
         ]
     let modal: ToolbarSelection
 
