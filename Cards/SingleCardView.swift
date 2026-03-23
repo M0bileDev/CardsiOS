@@ -15,6 +15,11 @@ struct SingleCardView: View {
     var body: some View {
         NavigationStack {
             Color.yellow
+                .sheet(item: $currentModal, content: { item in
+                    switch item{
+                    default: Text(String(describing: item))
+                    }
+                })
                 .toolbar(content: {
                     ToolbarItem(
                         placement: .topBarTrailing,
