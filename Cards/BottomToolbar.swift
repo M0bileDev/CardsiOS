@@ -11,6 +11,7 @@ struct BottomToolbar: View {
     
     @Binding var modal: ToolbarSelection?
     
+    
     var body: some View {
         HStack{
             Button(action: {
@@ -23,6 +24,16 @@ struct BottomToolbar: View {
 }
 
 struct ToolbarButton: View {
+    private let modalButton : [
+        ToolbarSelection: (text:String, imageName:String)
+    ] = [
+        .photoModal: ("Photos","photo"),
+        .frameModal: ("Frames","square.on.circle"),
+        .stickerModal: ("Stickers","heart.circle"),
+        .textModal: ("Text","textFormat")
+    ]
+    let modal: ToolbarSelection
+    
     var body: some View {
         VStack {
             Image(systemName: "heart.circle")
