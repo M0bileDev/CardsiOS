@@ -10,10 +10,17 @@ import SwiftUI
 struct ResizableView: View {
 
     @State private var transform = Transform()
-    private var dragGesture: some Gesture{
+    @State private var previousOffset: CGSize = .zero
+
+    private var dragGesture: some Gesture {
         DragGesture()
-            .onChanged{ value in
-                transform.offset = value.translation
+            .onChanged { value in
+                transform.offset = CGSize(
+                    width: value.translation.width + previousOffset.width,
+                    height: value.translation.height + previousOffset.height
+                )
+            }.onEnded { _ in
+                previousOffset = transform.offset
             }
     }
     private let content = RoundedRectangle(cornerRadius: 30.0)
