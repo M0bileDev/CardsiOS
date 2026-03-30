@@ -15,7 +15,6 @@ struct BottomToolbar: View {
         HStack {
             ForEach(
                 ToolbarSelection.allCases,
-                id: \.self,
                 content: { selection in
                     Button(
                         action: {
