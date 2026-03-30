@@ -10,6 +10,12 @@ import SwiftUI
 struct ResizableView: View {
 
     @State private var transform = Transform()
+    private var dragGesture: some Gesture{
+        DragGesture()
+            .onChanged{ value in
+                transform.offset = value.translation
+            }
+    }
     private let content = RoundedRectangle(cornerRadius: 30.0)
     private let color = Color.red
 
@@ -17,6 +23,8 @@ struct ResizableView: View {
         content
             .frame(width: transform.size.width, height: transform.size.height)
             .foregroundColor(color)
+            .offset(transform.offset)
+            .gesture(dragGesture)
     }
 }
 
