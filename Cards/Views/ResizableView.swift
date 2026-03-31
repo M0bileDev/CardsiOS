@@ -15,10 +15,7 @@ struct ResizableView: View {
     private var dragGesture: some Gesture {
         DragGesture()
             .onChanged { value in
-                transform.offset = CGSize(
-                    width: value.translation.width + previousOffset.width,
-                    height: value.translation.height + previousOffset.height
-                )
+                transform.offset = value.translation + previousOffset
             }.onEnded { _ in
                 previousOffset = transform.offset
             }
