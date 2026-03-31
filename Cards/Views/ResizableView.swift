@@ -35,7 +35,7 @@ struct ResizableView: View {
         MagnificationGesture()
             .onChanged { scale in
                 self.scale = scale
-            }.onEnded{ scale in
+            }.onEnded { scale in
                 transform.size.width *= scale
                 transform.size.height *= scale
                 self.scale = 1.0
@@ -52,7 +52,7 @@ struct ResizableView: View {
             .scaleEffect(scale)
             .offset(transform.offset)
             .gesture(dragGesture)
-            .gesture(rotationGesture)
+            .gesture(SimultaneousGesture(rotationGesture, scaleGesture))
     }
 }
 
