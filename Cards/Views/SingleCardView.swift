@@ -12,14 +12,32 @@ struct SingleCardView: View {
     @Environment(\.dismiss) var dismiss
     @State var currentModal: ToolbarSelection?
 
+    var content: some View {
+        ZStack {
+            Capsule()
+                .foregroundColor(.yellow)
+                .resizableView()
+            Text("Resize me!")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .resizableView()
+            Circle()
+                .resizableView()
+                .offset(CGSize(width: 50, height: 200))
+        }
+    }
+
     var body: some View {
         NavigationStack {
-            Color.yellow
-                .sheet(item: $currentModal, content: { item in
-                    switch item{
-                    default: Text(String(describing: item))
+            content
+                .sheet(
+                    item: $currentModal,
+                    content: { item in
+                        switch item {
+                        default: Text(String(describing: item))
+                        }
                     }
-                })
+                )
                 .toolbar(content: {
                     ToolbarItem(
                         placement: .topBarTrailing,
@@ -30,7 +48,7 @@ struct SingleCardView: View {
                         }
                     )
                     ToolbarItem(placement: .bottomBar) {
-                      BottomToolbar(modal: $currentModal)
+                        BottomToolbar(modal: $currentModal)
                     }
                 })
         }
