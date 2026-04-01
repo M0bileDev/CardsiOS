@@ -11,7 +11,10 @@ struct CardThumbnail: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 15)
             .foregroundStyle(.gray)
-            .frame(width: 150, height: 250)
+            .frame(
+                width: Settings.thumbnailSize.width,
+                height: Settings.thumbnailSize.height
+            )
     }
 }
 
