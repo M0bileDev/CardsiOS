@@ -14,15 +14,16 @@ struct SingleCardView: View {
 
     var content: some View {
         ZStack {
-            Capsule()
-                .foregroundColor(.yellow)
-                .resizableView()
-            Text("Resize me!")
+            Group {
+              Capsule()
+                .foregroundStyle(.yellow)
+              Text("Resize Me!")
                 .fontWeight(.bold)
                 .font(.system(size: 500))
                 .minimumScaleFactor(0.01)
                 .lineLimit(1)
-                .resizableView()
+            }
+            .resizableView()
             Circle()
                 .resizableView()
                 .offset(CGSize(width: 50, height: 200))
