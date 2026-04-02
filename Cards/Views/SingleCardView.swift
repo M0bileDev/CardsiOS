@@ -15,13 +15,13 @@ struct SingleCardView: View {
     var content: some View {
         ZStack {
             Group {
-              Capsule()
-                .foregroundStyle(.yellow)
-              Text("Resize Me!")
-                .fontWeight(.bold)
-                .font(.system(size: 500))
-                .minimumScaleFactor(0.01)
-                .lineLimit(1)
+                Capsule()
+                    .foregroundStyle(.yellow)
+                Text("Resize Me!")
+                    .fontWeight(.bold)
+                    .font(.system(size: 500))
+                    .minimumScaleFactor(0.01)
+                    .lineLimit(1)
             }
             .resizableView()
             Circle()
@@ -32,28 +32,7 @@ struct SingleCardView: View {
 
     var body: some View {
         NavigationStack {
-            content
-                .sheet(
-                    item: $currentModal,
-                    content: { item in
-                        switch item {
-                        default: Text(String(describing: item))
-                        }
-                    }
-                )
-                .toolbar(content: {
-                    ToolbarItem(
-                        placement: .topBarTrailing,
-                        content: {
-                            Button("Done") {
-                                dismiss()
-                            }
-                        }
-                    )
-                    ToolbarItem(placement: .bottomBar) {
-                        BottomToolbar(modal: $currentModal)
-                    }
-                })
+            content.cardToolbar(modal: $currentModal)
         }
     }
 }
