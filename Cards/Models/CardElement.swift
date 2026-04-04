@@ -12,6 +12,12 @@ protocol CardElement {
     var transform: Transform { set get }
 }
 
+extension CardElement{
+    func index(in array: [CardElement]) -> Int? {
+        array.firstIndex{ $0.id == id}
+    }
+}
+
 struct ImageElement: CardElement {
     var id: UUID = UUID()
     var transform: Transform = Transform()
