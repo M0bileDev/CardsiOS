@@ -7,6 +7,7 @@
 
 import SwiftUI
 
-struct CardElement{
-    
+protocol CardElement {
+    var id: UUID { get }
+    var transform: Transform { set get }
 }
