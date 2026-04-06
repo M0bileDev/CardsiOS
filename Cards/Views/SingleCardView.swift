@@ -9,25 +9,12 @@ import SwiftUI
 
 struct SingleCardView: View {
 
+    let card: Card
     @Environment(\.dismiss) var dismiss
     @State var currentModal: ToolbarSelection?
 
     var content: some View {
-        ZStack {
-            Group {
-                Capsule()
-                    .foregroundStyle(.yellow)
-                Text("Resize Me!")
-                    .fontWeight(.bold)
-                    .font(.system(size: 500))
-                    .minimumScaleFactor(0.01)
-                    .lineLimit(1)
-            }
-            .resizableView()
-            Circle()
-                .resizableView()
-                .offset(CGSize(width: 50, height: 200))
-        }
+        card.backgroundColor
     }
 
     var body: some View {
@@ -38,5 +25,5 @@ struct SingleCardView: View {
 }
 
 #Preview {
-    SingleCardView(currentModal: nil)
+    SingleCardView(card: initialCards[0], currentModal: nil)
 }
