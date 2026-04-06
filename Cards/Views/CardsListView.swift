@@ -9,8 +9,8 @@ import SwiftUI
 
 struct CardsListView: View {
 
-    @State private var isPresented: Bool = false
     @EnvironmentObject private var store: CardStore
+    @State private var selectedCard: Card?
 
     private var list: some View {
         ScrollView(showsIndicators: false) {
@@ -18,7 +18,7 @@ struct CardsListView: View {
                 ForEach(store.cards) { card in
                     CardThumbnail(card: card)
                         .onTapGesture {
-                            isPresented.toggle()
+                            selectedCard = card
                         }
                 }
             }
@@ -27,8 +27,8 @@ struct CardsListView: View {
 
     var body: some View {
         list.fullScreenCover(
-            isPresented: $isPresented,
-            content: {
+            item: $selectedCard,
+            content: { card in
                 SingleCardView()
             }
         )
