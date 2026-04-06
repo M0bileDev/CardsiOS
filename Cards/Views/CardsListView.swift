@@ -29,7 +29,7 @@ struct CardsListView: View {
         list.fullScreenCover(
             item: $selectedCard,
             content: { card in
-                SingleCardView()
+                SingleCardView(card: card)
             }
         )
     }
