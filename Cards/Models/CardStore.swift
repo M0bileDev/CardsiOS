@@ -5,15 +5,19 @@
 //  Created by Damian Ogórek on 04/04/2026.
 //
 
-import SwiftUI
 import Combine
+import SwiftUI
 
 class CardStore: ObservableObject {
-  @Published var cards: [Card] = []
-    
+    @Published var cards: [Card] = []
+
     init(defaultData: Bool = false) {
-        if(defaultData){
+        if defaultData {
             cards = initialCards
         }
+    }
+
+    func index(for card: Card) -> Int? {
+        cards.firstIndex { $0.id == card.id }
     }
 }
