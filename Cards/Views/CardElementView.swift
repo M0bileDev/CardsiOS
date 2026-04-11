@@ -28,3 +28,17 @@ struct ImageElementView: View {
             .aspectRatio(contentMode: .fit)
     }
 }
+
+struct TextElementView: View {
+    
+    let element: TextElement
+    
+    var body: some View {
+        if !element.text.isEmpty{
+            Text(element.text)
+                .font(.custom(element.textFont, size: 200))
+                .foregroundStyle(element.textColor)
+                .scalableText()
+        }
+    }
+}
