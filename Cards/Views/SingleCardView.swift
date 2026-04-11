@@ -13,13 +13,9 @@ struct SingleCardView: View {
     @Environment(\.dismiss) var dismiss
     @State var currentModal: ToolbarSelection?
 
-    var content: some View {
-        card.backgroundColor
-    }
-
     var body: some View {
         NavigationStack {
-            content.cardToolbar(modal: $currentModal)
+            CardDetailView(card: $card).cardToolbar(modal: $currentModal)
         }
     }
 }
