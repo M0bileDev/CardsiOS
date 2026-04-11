@@ -29,7 +29,11 @@ struct CardsListView: View {
         list.fullScreenCover(
             item: $selectedCard,
             content: { card in
-                SingleCardView(card: card)
+                if let index = store.index(for: card) {
+                  SingleCardView(card: $store.cards[index])
+                } else {
+                  fatalError("Unable to locate selected card")
+                }
             }
         )
     }
