@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SingleCardView: View {
 
-    let card: Card
+    @Binding var card: Card
     @Environment(\.dismiss) var dismiss
     @State var currentModal: ToolbarSelection?
 
@@ -25,5 +25,5 @@ struct SingleCardView: View {
 }
 
 #Preview {
-    SingleCardView(card: initialCards[0], currentModal: nil)
+    SingleCardView(card: .constant(initialCards[0]), currentModal: nil)
 }
