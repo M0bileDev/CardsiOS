@@ -8,13 +8,21 @@
 import SwiftUI
 
 struct CardElementView: View {
+
+    let element: CardElement
+
     var body: some View {
-        Text( /*@START_MENU_TOKEN@*/"Hello, World!" /*@END_MENU_TOKEN@*/)
+        if let element = element as? ImageElement {
+            ImageElementView(element: element)
+        }
+        if let element = element as? TextElement {
+            TextElementView(element: element)
+        }
     }
 }
 
 #Preview {
-    CardElementView()
+    CardElementView(element: initialElements[0])
 }
 
 struct ImageElementView: View {
@@ -30,11 +38,11 @@ struct ImageElementView: View {
 }
 
 struct TextElementView: View {
-    
+
     let element: TextElement
-    
+
     var body: some View {
-        if !element.text.isEmpty{
+        if !element.text.isEmpty {
             Text(element.text)
                 .font(.custom(element.textFont, size: 200))
                 .foregroundStyle(element.textColor)
