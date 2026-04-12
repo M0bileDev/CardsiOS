@@ -50,6 +50,9 @@ struct ResizableView: ViewModifier {
             .offset(transform.offset)
             .gesture(dragGesture)
             .gesture(SimultaneousGesture(rotationGesture, scaleGesture))
+            .onAppear{
+                previousOffset = transform.offset
+            }
     }
 }
 
