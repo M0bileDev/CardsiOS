@@ -21,5 +21,6 @@ struct SingleCardView: View {
 }
 
 #Preview {
-    SingleCardView(card: .constant(initialCards[0]), currentModal: nil)
+    @Previewable @State var card = initialCards[0]
+    SingleCardView(card: $card, currentModal: nil)
 }
