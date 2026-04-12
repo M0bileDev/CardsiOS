@@ -32,7 +32,8 @@ struct CardDetailView: View {
 }
 
 #Preview {
-    CardDetailView(card: .constant(initialCards[0])).environmentObject(
+    @Previewable @State var card = initialCards[0]
+    CardDetailView(card: $card).environmentObject(
         CardStore(defaultData: true)
     )
 }
