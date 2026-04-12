@@ -60,7 +60,8 @@ extension View {
 }
 
 #Preview {
+    @Previewable @State var transform = Transform()
     RoundedRectangle(cornerRadius: 30)
         .foregroundColor(.blue)
-        .resizableView(transform: .constant(Transform()))
+        .resizableView(transform: $transform)
 }
