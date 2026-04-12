@@ -20,7 +20,7 @@ struct CardDetailView: View {
                 id: \.id,
                 content: { $element in
                     CardElementView(element: element)
-                        .resizableView()
+                        .resizableView(transform: $element.transform)
                         .frame(
                             width: element.transform.size.width,
                             height: element.transform.size.height
