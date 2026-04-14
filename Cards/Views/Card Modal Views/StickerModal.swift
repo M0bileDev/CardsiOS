@@ -13,11 +13,13 @@ struct StickerModal: View {
     
     var body: some View {
         ScrollView(content: {
-            ForEach(stickerNames, id: \.self, content: { sticker in
-                Image(uiImage: image(from: sticker))
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            })
+            LazyVStack {
+                ForEach(stickerNames, id: \.self, content: { sticker in
+                    Image(uiImage: image(from: sticker))
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                })
+            }
         }).onAppear(perform: {
             stickerNames = Self.loadStickers()
         })
