@@ -6,7 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A7898CAD2F8EBC8500F8C5E4 /* Stickers in Resources */ = {isa = PBXBuildFile; fileRef = A7898CAC2F8EBC8500F8C5E4 /* Stickers */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		A7898CAC2F8EBC8500F8C5E4 /* Stickers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Stickers; path = ../Stickers; sourceTree = "<group>"; };
 		A7ABE2E12F7078F7002CEFBE /* Cards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -45,6 +50,7 @@
 		A7ABE2D82F7078F7002CEFBE = {
 			isa = PBXGroup;
 			children = (
+				A7898CAC2F8EBC8500F8C5E4 /* Stickers */,
 				A7ABE2E32F7078F7002CEFBE /* Cards */,
 				A7ABE2E22F7078F7002CEFBE /* Products */,
 			);
@@ -122,6 +128,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7898CAD2F8EBC8500F8C5E4 /* Stickers in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
