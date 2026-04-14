@@ -18,6 +18,7 @@ struct CardToolbar: ViewModifier {
                 item: $currentModal,
                 content: { item in
                     switch item {
+                    case .stickerModal: StickerModal()
                     default: Text(String(describing: item))
                     }
                 }
@@ -43,7 +44,3 @@ extension View {
         modifier(CardToolbar(currentModal: modal))
     }
 }
-
-//#Preview {
-//    CardToolbar()
-//}
