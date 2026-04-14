@@ -8,16 +8,19 @@
 import SwiftUI
 
 struct StickerModal: View {
+    
+    @State private var stickerNames: [String] = []
+    
     var body: some View {
-        if let resourcePath = Bundle.main.resourcePath,
-            let image = UIImage(
-                named: resourcePath + "/Stickers/Camping/fire.png"
-            )
-        {
-            Image(uiImage: image)
-        } else {
-            Image(.error)
-        }
+        ScrollView(content: {
+            ForEach(stickerNames, id: \.self, content: { sticker in
+                Image(uiImage: image(from: sticker))
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            })
+        }).onAppear(perform: {
+            stickerNames = Self.loadStickers()
+        })
     }
 
     static func loadStickers() -> [String] {
