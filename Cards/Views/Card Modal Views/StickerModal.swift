@@ -19,6 +19,43 @@ struct StickerModal: View {
             Image(.error)
         }
     }
+
+    static func loadStickers() -> [String] {
+        var themes: [URL] = []
+        var stickerNames: [String] = []
+
+        //default file manager
+        let fileManager = FileManager.default
+        //bundle resource path
+        if let resourcePath = Bundle.main.resourcePath,
+            //directory enumerator
+            let enumerator = fileManager.enumerator(
+                at: URL(fileURLWithPath: resourcePath + "/Stickers"),
+                includingPropertiesForKeys: nil,
+                options: [
+                    .skipsSubdirectoryDescendants,
+                    .skipsHiddenFiles,
+                ]
+            )
+        {
+            for case let url as URL in enumerator
+            where url.hasDirectoryPath {
+                themes.append(url)
+            }
+        }
+
+        for theme in themes {
+            if let files = try? fileManager.contentsOfDirectory(
+                atPath: theme.path
+            ) {
+                for file in files {
+                    stickerNames.append(theme.path + "/" + file)
+                }
+            }
+        }
+
+        return stickerNames
+    }
 }
 
 #Preview {
