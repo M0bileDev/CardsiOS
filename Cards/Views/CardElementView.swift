@@ -21,10 +21,6 @@ struct CardElementView: View {
     }
 }
 
-#Preview {
-    CardElementView(element: initialElements[0])
-}
-
 struct ImageElementView: View {
 
     let element: ImageElement
