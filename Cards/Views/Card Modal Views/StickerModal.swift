@@ -10,10 +10,15 @@ import SwiftUI
 struct StickerModal: View {
     
     @State private var stickerNames: [String] = []
+    let columns = [
+        GridItem(.adaptive(minimum: 120), spacing: 10),
+        GridItem(.adaptive(minimum: 120), spacing: 10),
+        GridItem(.adaptive(minimum: 120), spacing: 10),
+    ]
     
     var body: some View {
         ScrollView(content: {
-            LazyVStack {
+            LazyVGrid(columns: columns) {
                 ForEach(stickerNames, id: \.self, content: { sticker in
                     Image(uiImage: image(from: sticker))
                         .resizable()
