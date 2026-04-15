@@ -8,22 +8,33 @@
 import SwiftUI
 
 struct StickerModal: View {
-    
+
     @State private var stickerNames: [String] = []
+    @Binding var stickerImage: UIImage?
+    @Environment(\.dismiss) var dismiss
+
     let columns = [
         GridItem(.adaptive(minimum: 120), spacing: 10),
         GridItem(.adaptive(minimum: 120), spacing: 10),
         GridItem(.adaptive(minimum: 120), spacing: 10),
     ]
-    
+
     var body: some View {
         ScrollView(content: {
             LazyVGrid(columns: columns) {
-                ForEach(stickerNames, id: \.self, content: { sticker in
-                    Image(uiImage: image(from: sticker))
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                })
+                ForEach(
+                    stickerNames,
+                    id: \.self,
+                    content: { sticker in
+                        Image(uiImage: image(from: sticker))
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .onTapGesture {
+                                stickerImage = image(from: sticker)
+                                dismiss()
+                            }
+                    }
+                )
             }
         }).onAppear(perform: {
             stickerNames = Self.loadStickers()
@@ -74,5 +85,5 @@ func image(from path: String) -> UIImage {
 }
 
 #Preview {
-    StickerModal()
+    StickerModal(stickerImage: .constant(UIImage()))
 }
