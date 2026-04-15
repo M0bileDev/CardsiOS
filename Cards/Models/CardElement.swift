@@ -21,7 +21,10 @@ extension CardElement{
 struct ImageElement: CardElement {
     var id: UUID = UUID()
     var transform: Transform = Transform()
-    var image: Image
+    var uiImage: UIImage?
+    var image: Image {
+        Image(uiImage: uiImage ?? UIImage.error)
+    }
 }
 
 struct TextElement: CardElement {
