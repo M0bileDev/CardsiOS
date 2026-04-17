@@ -10,20 +10,29 @@ import SwiftUI
 struct BottomToolbar: View {
 
     @Binding var modal: ToolbarSelection?
+    @Binding var card: Card
 
     var body: some View {
         HStack {
             ForEach(
                 ToolbarSelection.allCases,
                 content: { selection in
-                    Button(
-                        action: {
-                            modal = selection
-                        },
-                        label: {
-                            ToolbarButton(modal: selection)
+                    switch selection {
+                    case .photoModal:
+                        Button {
+                        } label: {
+                            PhotosModal(card: $card)
                         }
-                    )
+                    default:
+                        Button(
+                            action: {
+                                modal = selection
+                            },
+                            label: {
+                                ToolbarButton(modal: selection)
+                            }
+                        )
+                    }
                 }
             )
         }
@@ -55,5 +64,5 @@ struct ToolbarButton: View {
 }
 
 #Preview {
-    BottomToolbar(modal: .constant(.stickerModal))
+    BottomToolbar(modal: .constant(.stickerModal), card: .constant(Card()))
 }
