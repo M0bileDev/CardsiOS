@@ -20,9 +20,17 @@ struct PhotosModal: View {
             selection: $selectedPhotos,
             //the filter for images
             matching: .images,
-            
+
             label: {
                 ToolbarButton(modal: .photoModal)
+            }
+        ).onChange(
+            of: selectedPhotos,
+            { _, items in
+                for item in items {
+                    print(item)
+                }
+                selectedPhotos = []
             }
         )
     }
