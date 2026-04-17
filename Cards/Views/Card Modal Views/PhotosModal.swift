@@ -28,7 +28,28 @@ struct PhotosModal: View {
             of: selectedPhotos,
             { _, items in
                 for item in items {
-                    print(item)
+                    item.loadTransferable(type: Data.self) {
+                        //Result<Success, Failure>
+                        //Success contains the image data
+                        //Failure contains a failure value
+                        result in
+                        //Task -> load the image on a background thread
+                        Task {
+                            switch result {
+                            case .success(let data):
+                                if let data,
+                                    let uiImage = UIImage(data: data)
+                                {
+                                    await MainActor.run(body: {
+                                        card.addElement(uiImage: uiImage)
+                                    })
+                                }
+                            case .failure(let failure):
+                                fatalError("Image transfer failed: \(failure)")
+                            }
+
+                        }
+                    }
                 }
                 selectedPhotos = []
             }
