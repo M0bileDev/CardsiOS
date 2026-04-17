@@ -20,14 +20,15 @@ struct CardToolbar: ViewModifier {
                 item: $currentModal,
                 content: { item in
                     switch item {
-                    case .stickerModal: StickerModal(
-                        stickerImage: $stickerImage
-                    ).onDisappear{
-                        if let stickerImage = stickerImage{
-                            card.addElement(uiImage: stickerImage)
+                    case .stickerModal:
+                        StickerModal(
+                            stickerImage: $stickerImage
+                        ).onDisappear {
+                            if let stickerImage = stickerImage {
+                                card.addElement(uiImage: stickerImage)
+                            }
+                            stickerImage = nil
                         }
-                        stickerImage = nil
-                    }
                     default: Text(String(describing: item))
                     }
                 }
@@ -42,7 +43,10 @@ struct CardToolbar: ViewModifier {
                     }
                 )
                 ToolbarItem(placement: .bottomBar) {
-                    BottomToolbar(modal: $currentModal)
+                    BottomToolbar(
+                        modal: $currentModal,
+                        card: $card
+                    )
                 }
             })
     }
@@ -59,7 +63,9 @@ struct CardToolbar: ViewModifier {
 }
 
 extension View {
-    func cardToolbar(modal: Binding<ToolbarSelection?>, card: Binding<Card>) -> some View {
+    func cardToolbar(modal: Binding<ToolbarSelection?>, card: Binding<Card>)
+        -> some View
+    {
         modifier(CardToolbar(currentModal: modal, card: card))
     }
 }
