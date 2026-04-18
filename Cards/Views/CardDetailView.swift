@@ -28,16 +28,16 @@ struct CardDetailView: View {
                 }
             )
         }
-        .dropDestination(for: Data.self) {
-            receivedData,
+        .dropDestination(for: CustomTransfer.self) {
+            items,
             location in
             print(location)
-            for data in receivedData {
-                if let image = UIImage(data: data) {
-                    card.addElement(uiImage: image)
+            Task {
+                await MainActor.run {
+                    card.addElements(from: items)
                 }
             }
-            return !receivedData.isEmpty
+            return !items.isEmpty
         }
     }
 }
