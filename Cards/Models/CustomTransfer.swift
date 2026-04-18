@@ -21,7 +21,19 @@ struct CustomTransfer: Transferable {
         }
 
         DataRepresentation(importedContentType: .text) { data in
-            return CustomTransfer(text: "Dragged text")
+            let docType = NSAttributedString.DocumentType.html
+            let encoding = String.Encoding.utf8.rawValue
+            guard let text = try? NSAttributedString(
+                data: data,
+                options: [
+                    .documentType: docType,
+                    .characterEncoding: encoding
+                ],
+                documentAttributes: nil
+            )else{
+                return CustomTransfer(text: nil)
+            }
+            return CustomTransfer(text: text.string)
         }
     }
 }
