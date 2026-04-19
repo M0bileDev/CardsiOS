@@ -62,6 +62,8 @@ struct CardToolbar: ViewModifier {
 
                             }
                         )
+                        .labelStyle(.iconOnly)
+                        .buttonBorderShape(.capsule)
                     }
                 )
             })
