@@ -48,6 +48,22 @@ struct CardToolbar: ViewModifier {
                         card: $card
                     )
                 }
+                ToolbarItem(
+                    placement: .topBarLeading,
+                    content: {
+                        PasteButton(
+                            payloadType: CustomTransfer.self,
+                            onPaste: { items in
+                                Task {
+                                    await MainActor.run {
+                                        card.addElements(from: items)
+                                    }
+                                }
+
+                            }
+                        )
+                    }
+                )
             })
     }
 }
