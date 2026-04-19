@@ -14,6 +14,29 @@ struct CardToolbar: ViewModifier {
     @Binding var card: Card
     @State private var stickerImage: UIImage?
 
+    var menu: some View {
+        Menu(
+            content: {
+                Button(
+                    action: {
+                        //todo: action
+                    },
+                    label: {
+                        Label("Paste", systemImage: "doc.on.clipboard")
+                    }
+                )
+                .disabled(
+                    !UIPasteboard.general.hasImages
+                        && !UIPasteboard.general.hasStrings
+                )
+            },
+            label: {
+                Label("Add", systemImage: "ellipsis.circle")
+            }
+        )
+
+    }
+
     func body(content: Content) -> some View {
         content
             .sheet(
@@ -37,6 +60,12 @@ struct CardToolbar: ViewModifier {
                 ToolbarItem(
                     placement: .topBarTrailing,
                     content: {
+                        menu
+                    }
+                )
+                ToolbarItem(
+                    placement: .topBarTrailing,
+                    content: {
                         Button("Done") {
                             dismiss()
                         }
@@ -48,24 +77,7 @@ struct CardToolbar: ViewModifier {
                         card: $card
                     )
                 }
-                ToolbarItem(
-                    placement: .topBarLeading,
-                    content: {
-                        PasteButton(
-                            payloadType: CustomTransfer.self,
-                            onPaste: { items in
-                                Task {
-                                    await MainActor.run {
-                                        card.addElements(from: items)
-                                    }
-                                }
-
-                            }
-                        )
-                        .labelStyle(.iconOnly)
-                        .buttonBorderShape(.capsule)
-                    }
-                )
+                
             })
     }
 }
