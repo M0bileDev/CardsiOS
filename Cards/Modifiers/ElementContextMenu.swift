@@ -7,12 +7,28 @@
 
 import SwiftUI
 
-struct ElementContextMenu : ViewModifier{
-    
+struct ElementContextMenu: ViewModifier {
+
     @Binding var card: Card
     @Binding var element: CardElement
-    
+
     func body(content: Content) -> some View {
         content
+            .contextMenu {
+                Button(
+                    action: {
+                        if let element = element as? TextElement {
+                            UIPasteboard.general.string = element.text
+                        } else if let element = element as? ImageElement,
+                            let image = element.uiImage
+                        {
+                            UIPasteboard.general.image = image
+                        }
+                    },
+                    label: {
+                        Label("Copy", systemImage: "doc.on.doc")
+                    }
+                )
+            }
     }
 }
