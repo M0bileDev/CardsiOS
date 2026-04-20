@@ -17,12 +17,14 @@ struct ElementContextMenu: ViewModifier {
             .contextMenu {
                 Button(
                     action: {
-                        if let element = element as? TextElement {
-                            UIPasteboard.general.string = element.text
-                        } else if let element = element as? ImageElement,
-                            let image = element.uiImage
-                        {
-                            UIPasteboard.general.image = image
+                        Task{
+                            if let element = element as? TextElement {
+                                UIPasteboard.general.string = element.text
+                            } else if let element = element as? ImageElement,
+                                let image = element.uiImage
+                            {
+                                UIPasteboard.general.image = image
+                            }
                         }
                     },
                     label: {
