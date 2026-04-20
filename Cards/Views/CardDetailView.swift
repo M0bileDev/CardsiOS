@@ -20,6 +20,7 @@ struct CardDetailView: View {
                 id: \.id,
                 content: { $element in
                     CardElementView(element: element)
+                        .elementContextMenu(card: $card, element: $element)
                         .resizableView(transform: $element.transform)
                         .frame(
                             width: element.transform.size.width,
