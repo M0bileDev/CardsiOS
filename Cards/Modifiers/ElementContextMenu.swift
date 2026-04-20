@@ -17,7 +17,7 @@ struct ElementContextMenu: ViewModifier {
             .contextMenu {
                 Button(
                     action: {
-                        Task{
+                        Task {
                             if let element = element as? TextElement {
                                 UIPasteboard.general.string = element.text
                             } else if let element = element as? ImageElement,
@@ -29,6 +29,17 @@ struct ElementContextMenu: ViewModifier {
                     },
                     label: {
                         Label("Copy", systemImage: "doc.on.doc")
+                    }
+                )
+                Button(
+                    role: .destructive,
+                    action: {
+                        Task {
+                            card.remove(element)
+                        }
+                    },
+                    label: {
+                        Label("Delete", systemImage: "trash")
                     }
                 )
             }
