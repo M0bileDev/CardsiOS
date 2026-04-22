@@ -7,22 +7,27 @@
 
 import SwiftUI
 
-#Preview {
+#Preview(traits: .sizeThatFitsLayout) {
     Triangle()
-        .frame(width: 150, height: 150)
+        .aspectRatio(1, contentMode: .fit)
         .background(Color.yellow)
 }
 
 struct Triangle: Shape {
     //rect -> drawing canvas
     func path(in rect: CGRect) -> Path {
+
+        let width = rect.width
+        let height = rect.height
+
         var path = Path()
-
-        path.move(to: CGPoint(x: 20, y: 30))
-
-        path.addLine(to: CGPoint(x: 130, y: 70))
-        path.addLine(to: CGPoint(x: 60, y: 140))
-
+        path.addLines(
+            [
+                CGPoint(x: width * 0.13, y: height * 0.2),
+                CGPoint(x: width * 0.87, y: height * 0.47),
+                CGPoint(x: width * 0.4, y: height * 0.93),
+            ]
+        )
         path.closeSubpath()
 
         return path
