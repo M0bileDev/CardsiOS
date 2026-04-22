@@ -17,6 +17,19 @@ struct CardsListView: View {
             VStack {
                 ForEach(store.cards) { card in
                     CardThumbnail(card: card)
+                        .contextMenu {
+                            Button(
+                                role: .destructive,
+                                action: {
+                                    Task {
+                                        store.remove(card)
+                                    }
+                                },
+                                label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                            )
+                        }
                         .onTapGesture {
                             selectedCard = card
                         }
@@ -30,9 +43,9 @@ struct CardsListView: View {
             item: $selectedCard,
             content: { card in
                 if let index = store.index(for: card) {
-                  SingleCardView(card: $store.cards[index])
+                    SingleCardView(card: $store.cards[index])
                 } else {
-                  fatalError("Unable to locate selected card")
+                    fatalError("Unable to locate selected card")
                 }
             }
         )
