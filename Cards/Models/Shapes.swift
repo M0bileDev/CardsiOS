@@ -19,3 +19,13 @@ import SwiftUI
     }
     .padding()
 }
+
+struct Triangle : Shape{
+    //rect -> drawing canvas
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        return path
+    }
+    
+    
+}
