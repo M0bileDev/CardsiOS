@@ -9,7 +9,7 @@ import SwiftUI
 
 #Preview(traits: .sizeThatFitsLayout) {
     Lens()
-        .stroke(lineWidth: 5)
+        .stroke(style: StrokeStyle(dash: [30, 10]))
         .aspectRatio(1, contentMode: .fit)
         .background(Color.yellow)
 }
@@ -61,10 +61,16 @@ struct Lens: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
         path.move(to: CGPoint(x: 0, y: rect.midY))
-        path.addQuadCurve(to: CGPoint(x: rect.maxX, y: rect.midY), control: CGPoint(x: rect.midX, y: 0))
-        path.addQuadCurve(to: CGPoint(x: 0, y: rect.midY), control: CGPoint(x: rect.midX, y: rect.maxY))
+        path.addQuadCurve(
+            to: CGPoint(x: rect.maxX, y: rect.midY),
+            control: CGPoint(x: rect.midX, y: 0)
+        )
+        path.addQuadCurve(
+            to: CGPoint(x: 0, y: rect.midY),
+            control: CGPoint(x: rect.midX, y: rect.maxY)
+        )
         path.closeSubpath()
-        
+
         return path
     }
 
