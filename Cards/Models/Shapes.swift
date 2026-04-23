@@ -47,6 +47,10 @@ struct Cone: Shape {
             endAngle: Angle(degrees: 180),
             clockwise: true
         )
+        path.addLine(to: CGPoint(x: rect.midX, y: rect.height))
+        path.addLine(to: CGPoint(x: rect.midX + radius, y: rect.midY))
+        path.closeSubpath()
+
         return path
     }
 
