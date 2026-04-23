@@ -33,3 +33,12 @@ struct Triangle: Shape {
         return path
     }
 }
+
+struct Cone: Shape{
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        return path
+    }
+    
+    
+}
