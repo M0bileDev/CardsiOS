@@ -8,7 +8,7 @@
 import SwiftUI
 
 #Preview(traits: .sizeThatFitsLayout) {
-    Triangle()
+    Cone()
         .aspectRatio(1, contentMode: .fit)
         .background(Color.yellow)
 }
@@ -34,11 +34,20 @@ struct Triangle: Shape {
     }
 }
 
-struct Cone: Shape{
+struct Cone: Shape {
     func path(in rect: CGRect) -> Path {
+
+        let radius = min(rect.midX, rect.midY)
+
         var path = Path()
+        path.addArc(
+            center: CGPoint(x: rect.midX, y: rect.midY),
+            radius: radius,
+            startAngle: Angle(degrees: 0),
+            endAngle: Angle(degrees: 180),
+            clockwise: true
+        )
         return path
     }
-    
-    
+
 }
