@@ -9,6 +9,7 @@ import SwiftUI
 
 #Preview(traits: .sizeThatFitsLayout) {
     Lens()
+        .stroke(lineWidth: 5)
         .aspectRatio(1, contentMode: .fit)
         .background(Color.yellow)
 }
