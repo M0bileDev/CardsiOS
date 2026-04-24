@@ -8,7 +8,12 @@
 import SwiftUI
 
 enum Shapes {
-    static let shapes: [Shape] = [Circle(), Rectangle()]
+    static let shapes: [AnyShape] = [
+        AnyShape(Circle()),
+        AnyShape(Rectangle()),
+        AnyShape(Cone()),
+        AnyShape(Lens()),
+    ]
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
