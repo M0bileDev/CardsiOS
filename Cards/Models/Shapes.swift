@@ -9,7 +9,13 @@ import SwiftUI
 
 #Preview(traits: .sizeThatFitsLayout) {
     Lens()
-        .stroke(style: StrokeStyle(dash: [30, 10]))
+        .stroke(
+            Color.primary,
+            style: StrokeStyle(
+                lineWidth: 10, lineJoin: .round
+            )
+        )
+        .padding()
         .aspectRatio(1, contentMode: .fit)
         .background(Color.yellow)
 }
