@@ -15,11 +15,17 @@ struct CardDetailView: View {
     var body: some View {
         ZStack {
             card.backgroundColor
+                .onTapGesture {
+                    store.selectedElement = nil
+                }
             ForEach(
                 $card.elements,
                 id: \.id,
                 content: { $element in
                     CardElementView(element: element)
+                        .onTapGesture {
+                            store.selectedElement = element
+                        }
                         .elementContextMenu(card: $card, element: $element)
                         .resizableView(transform: $element.transform)
                         .frame(
@@ -39,6 +45,9 @@ struct CardDetailView: View {
                 }
             }
             return !items.isEmpty
+        }
+        .onDisappear {
+            store.selectedElement = nil
         }
     }
 }
