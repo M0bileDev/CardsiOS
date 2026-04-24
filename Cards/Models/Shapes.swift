@@ -7,12 +7,17 @@
 
 import SwiftUI
 
+enum Shapes {
+    static let shapes: [Shape] = [Circle(), Rectangle()]
+}
+
 #Preview(traits: .sizeThatFitsLayout) {
     Lens()
         .stroke(
             Color.primary,
             style: StrokeStyle(
-                lineWidth: 10, lineJoin: .round
+                lineWidth: 10,
+                lineJoin: .round
             )
         )
         .padding()
