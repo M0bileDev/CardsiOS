@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct CardDetailView: View {
-
+    
     @EnvironmentObject var store: CardStore
     @Binding var card: Card
-
+    
     var body: some View {
         ZStack {
             card.backgroundColor
@@ -49,6 +49,10 @@ struct CardDetailView: View {
         .onDisappear {
             store.selectedElement = nil
         }
+    }
+    
+    func isSelected(_ element: CardElement) -> Bool {
+        store.selectedElement?.id == element.id
     }
 }
 
