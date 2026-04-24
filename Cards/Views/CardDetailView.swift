@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct CardDetailView: View {
-    
+
     @EnvironmentObject var store: CardStore
     @Binding var card: Card
-    
+
     var body: some View {
         ZStack {
             card.backgroundColor
@@ -23,6 +23,11 @@ struct CardDetailView: View {
                 id: \.id,
                 content: { $element in
                     CardElementView(element: element)
+                        .border(
+                            Settings.borderColor,
+                            width: isSelected(element)
+                                ? Settings.borderWidth : 0
+                        )
                         .onTapGesture {
                             store.selectedElement = element
                         }
@@ -32,6 +37,7 @@ struct CardDetailView: View {
                             width: element.transform.size.width,
                             height: element.transform.size.height
                         )
+                        
                 }
             )
         }
@@ -50,7 +56,7 @@ struct CardDetailView: View {
             store.selectedElement = nil
         }
     }
-    
+
     func isSelected(_ element: CardElement) -> Bool {
         store.selectedElement?.id == element.id
     }
