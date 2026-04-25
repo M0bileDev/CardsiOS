@@ -30,7 +30,7 @@ struct ImageElementView: View {
             .image
             .resizable()
             .aspectRatio(contentMode: .fit)
-            
+
     }
 }
 
@@ -48,13 +48,15 @@ struct TextElementView: View {
     }
 }
 
-private extension ImageElementView {
+extension ImageElementView {
 
     @ViewBuilder
-    func clip() -> some View {
+    fileprivate func clip() -> some View {
         if let frameIndex = element.frameIndex {
             let shape = Shapes.shapes[frameIndex]
-            self.clipShape(shape)
+            self
+                .clipShape(shape)
+                .contentShape(shape)
         } else {
             self
         }
