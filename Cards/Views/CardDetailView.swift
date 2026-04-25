@@ -23,6 +23,7 @@ struct CardDetailView: View {
                 id: \.id,
                 content: { $element in
                     CardElementView(element: element)
+                        .clipShape(Shapes.shapes[0])
                         .border(
                             Settings.borderColor,
                             width: isSelected(element)
