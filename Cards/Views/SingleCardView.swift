@@ -10,17 +10,18 @@ import SwiftUI
 struct SingleCardView: View {
 
     @Binding var card: Card
-    @Environment(\.dismiss) var dismiss
-    @State var currentModal: ToolbarSelection?
+    @State private var currentModal: ToolbarSelection?
 
     var body: some View {
         NavigationStack {
-            CardDetailView(card: $card).cardToolbar(modal: $currentModal, card: $card)
+            CardDetailView(card: $card)
+                .cardToolbar(modal: $currentModal, card: $card)
         }
     }
 }
 
 #Preview {
     @Previewable @State var card = initialCards[0]
-    SingleCardView(card: $card, currentModal: nil)
+    SingleCardView(card: $card)
+        .environmentObject(CardStore(defaultData: true))
 }
