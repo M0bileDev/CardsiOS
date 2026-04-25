@@ -9,8 +9,17 @@ import SwiftUI
 
 struct BottomToolbar: View {
 
+    @EnvironmentObject var store: CardStore
     @Binding var modal: ToolbarSelection?
     @Binding var card: Card
+    
+    func defaultButton(_ selection: ToolbarSelection) -> some View{
+        Button(action: {
+            modal = selection
+        }, label: {
+            ToolbarButton(modal: selection)
+        })
+    }
 
     var body: some View {
         HStack {
@@ -63,6 +72,9 @@ struct ToolbarButton: View {
     }
 }
 
+
+
 #Preview {
     BottomToolbar(modal: .constant(.stickerModal), card: .constant(Card()))
+        .environmentObject(CardStore())
 }
