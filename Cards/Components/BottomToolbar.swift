@@ -32,15 +32,14 @@ struct BottomToolbar: View {
                         } label: {
                             PhotosModal(card: $card)
                         }
+                    case .frameModal:
+                        defaultButton(selection)
+                            .disabled(
+                                store.selectedElement == nil ||
+                                !(store.selectedElement is ImageElement)
+                            )
                     default:
-                        Button(
-                            action: {
-                                modal = selection
-                            },
-                            label: {
-                                ToolbarButton(modal: selection)
-                            }
-                        )
+                        defaultButton(selection)
                     }
                 }
             )
