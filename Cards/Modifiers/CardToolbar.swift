@@ -68,6 +68,17 @@ struct CardToolbar: ViewModifier {
                             }
                             stickerImage = nil
                         }
+                    case .frameModal:
+                        FrameModal(frameIndex: $frameIndex)
+                            .onDisappear(perform: {
+                                if let frameIndex {
+                                    card.update(
+                                        store.selectedElement,
+                                        frameIndex: frameIndex
+                                    )
+                                }
+                                frameIndex = nil
+                            })
                     default: Text(String(describing: item))
                     }
                 }
@@ -106,6 +117,7 @@ struct CardToolbar: ViewModifier {
                 card: .constant(Card())
             )
         )
+        .environmentObject(CardStore(defaultData: true))
 }
 
 extension View {
