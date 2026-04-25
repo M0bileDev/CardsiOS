@@ -36,4 +36,14 @@ struct Card: Identifiable {
             elements.remove(at: index)
         }
     }
+
+    mutating func update(_ element: CardElement?, frameIndex: Int) {
+        guard element is ImageElement,
+            let index = element?.index(in: elements),
+            var imageElement = elements[index] as? ImageElement
+        else { return }
+
+        imageElement.frameIndex = frameIndex
+        elements[index] = imageElement
+    }
 }
