@@ -10,9 +10,11 @@ import SwiftUI
 struct CardToolbar: ViewModifier {
 
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var store: CardStore
     @Binding var currentModal: ToolbarSelection?
     @Binding var card: Card
     @State private var stickerImage: UIImage?
+    @State private var frameIndex: Int?
 
     var menu: some View {
         Menu(
