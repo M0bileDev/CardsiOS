@@ -23,10 +23,9 @@ struct CardDetailView: View {
                 id: \.id,
                 content: { $element in
                     CardElementView(element: element)
-                        .border(
-                            Settings.borderColor,
-                            width: isSelected(element)
-                                ? Settings.borderWidth : 0
+                        .overlay(
+                            element: element,
+                            isSelected: isSelected(element)
                         )
                         .onTapGesture {
                             store.selectedElement = element
@@ -37,7 +36,7 @@ struct CardDetailView: View {
                             width: element.transform.size.width,
                             height: element.transform.size.height
                         )
-                        
+
                 }
             )
         }
@@ -59,6 +58,33 @@ struct CardDetailView: View {
 
     func isSelected(_ element: CardElement) -> Bool {
         store.selectedElement?.id == element.id
+    }
+
+}
+
+extension View {
+    @ViewBuilder
+    fileprivate func overlay(
+        element: CardElement,
+        isSelected: Bool
+    ) -> some View {
+        if isSelected,
+            let element = element as? ImageElement,
+            let frameIndex = element.frameIndex
+        {
+            let shape = Shapes.shapes[frameIndex]
+            self.overlay(
+                shape
+                    .stroke(lineWidth: Settings.borderWidth)
+                    .foregroundStyle(Settings.borderColor)
+            )
+        } else {
+            self
+                .border(
+                    Settings.borderColor,
+                    width: isSelected ? Settings.borderWidth : 0
+                )
+        }
     }
 }
 
