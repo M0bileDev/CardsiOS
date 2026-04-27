@@ -13,6 +13,26 @@ extension UIImage {
     static let maxSize = CGSize(width: 1000, height: 1500)
 
     /**
+     Loads a PNG image from the app's documents directory using a name.
+    
+     It first checks if the string is "none" — if so, it returns a fallback .error image immediately.
+     Otherwise, it builds the file path, attempts to read the file data, and converts it to a UIImage.
+    
+     If anything fails along the way (file not found, corrupted data, etc.), it falls back to the .error image.
+     */
+    static func load(name: String) -> UIImage {
+        guard name != "none" else { return .error }
+
+        let url = URL.documentsDirectory.appendingPathComponent(name)
+            .appendingPathExtension(for: .png)
+        if let imageData = try? Data(contentsOf: url) {
+            return UIImage(data: imageData) ?? .error
+        } else {
+            return .error
+        }
+    }
+
+    /**
      Deletes a PNG image file from the app's documents directory.
     
      It takes an optional file name, unwraps it, constructs the full file path by appending the .png extension to the documents directory, and then attempts to remove the file using FileManager.
