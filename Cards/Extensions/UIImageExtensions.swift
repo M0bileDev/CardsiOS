@@ -13,6 +13,32 @@ extension UIImage {
     static let maxSize = CGSize(width: 1000, height: 1500)
 
     /**
+     Saves the image as a PNG file to the app's documents directory.
+     
+     It first resizes the image if it's too large via resizeLargeImage(),
+     then determines the filename, either using the provided name or generating a new UUID string.
+     
+     It converts the image to PNG data and writes it to disk, logging any errors to the console.
+     
+     Finally, it returns the filename (without the .png extension), which can later be used with the load method to retrieve the image.
+     */
+    func save(to name: String? = nil) -> String {
+        let image = resizeLargeImage()
+        let path = name ?? UUID().uuidString
+        let url = URL.documentsDirectory.appendingPathComponent(path)
+
+        do {
+            try image.pngData()?.write(
+                to: url.appendingPathExtension(for: .png)
+            )
+        } catch {
+            print(error.localizedDescription)
+        }
+
+        return url.lastPathComponent
+    }
+
+    /**
      Loads a PNG image from the app's documents directory using a name.
     
      It first checks if the string is "none" — if so, it returns a fallback .error image immediately.
