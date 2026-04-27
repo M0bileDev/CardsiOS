@@ -6,10 +6,26 @@
 //
 
 import SwiftUI
+internal import UniformTypeIdentifiers
 
 extension UIImage {
     static let minSize = CGSize(width: 300, height: 200)
     static let maxSize = CGSize(width: 1000, height: 1500)
+
+    /**
+     Deletes a PNG image file from the app's documents directory.
+    
+     It takes an optional file name, unwraps it, constructs the full file path by appending the .png extension to the documents directory, and then attempts to remove the file using FileManager.
+    
+     If the name is nil or the deletion fails, it silently does nothing (try?)
+     */
+    static func remove(name: String?) {
+        if let name {
+            let url = URL.documentsDirectory.appendingPathComponent(name)
+                .appendingPathExtension(for: .png)
+            try? FileManager.default.removeItem(at: url)
+        }
+    }
 
     func resizeLargeImage() -> UIImage {
         let defaultSize: CGFloat = 1000
@@ -44,7 +60,7 @@ extension UIImage {
     /**
      Helper that takes an image name, attempts to load it from the asset catalog via UIImage(named:), and if successful, returns
      the computed initialSize() (the aspect-ratio-preserving, clamped size from the previous method).
-     
+    
      If the image can't be found, it returns .zero as a fallback.
      */
     static func imageSize(_ imageName: String) -> CGSize {
