@@ -8,6 +8,8 @@
 import SwiftUI
 
 extension UIImage {
+    static let minSize = CGSize(width: 300, height: 200)
+    static let maxSize = CGSize(width: 1000, height: 1500)
 
     func resizeLargeImage() -> UIImage {
         let defaultSize: CGFloat = 1000
