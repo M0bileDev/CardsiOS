@@ -42,13 +42,27 @@ extension UIImage {
     }
 
     /**
+     Helper that takes an image name, attempts to load it from the asset catalog via UIImage(named:), and if successful, returns
+     the computed initialSize() (the aspect-ratio-preserving, clamped size from the previous method).
+     
+     If the image can't be found, it returns .zero as a fallback.
+     */
+    static func imageSize(_ imageName: String) -> CGSize {
+        if let image = UIImage(named: imageName) {
+            return image.initialSize()
+        }
+
+        return .zero
+    }
+
+    /**
      Calculates an initial display size for an element (likely an image) while preserving its original aspect ratio.
-     
+    
      It starts from a default size (Settings.defaultElementSize), then determines whether the element is landscape/square or portrait.
-     
+    
      For landscape, it clamps the width between 300 - 1000pt and derives the height from the aspect ratio.
      For portrait, it clamps the height between 200 - 1500pt and derives the width.
-     
+    
      The result is a CGSize that fits within the min/max bounds without distorting the content.
      */
     func initialSize() -> CGSize {
