@@ -11,7 +11,7 @@ import SwiftUI
 struct CardsApp: App {
 
     init() {
-        Team.save()
+        Team.load()
     }
 
     @StateObject var store = CardStore(defaultData: true)
@@ -35,6 +35,18 @@ struct Team: Codable {
             let data = try encoder.encode(teamData)
             let url = URL.documentsDirectory.appendingPathComponent("TeamData")
             try data.write(to: url)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+
+    static func load() {
+        let url = URL.documentsDirectory.appendingPathComponent("TeamData")
+        do {
+            let data = try Data(contentsOf: url)
+            let decoder = JSONDecoder()
+            let team = try decoder.decode(Team.self, from: data)
+            print(team)
         } catch {
             print(error.localizedDescription)
         }
