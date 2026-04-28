@@ -46,4 +46,8 @@ struct Card: Identifiable {
         imageElement.frameIndex = frameIndex
         elements[index] = imageElement
     }
+    
+    func save(){
+        print("Saving data...")
+    }
 }
