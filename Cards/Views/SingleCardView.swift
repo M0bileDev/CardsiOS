@@ -11,6 +11,7 @@ struct SingleCardView: View {
 
     @Binding var card: Card
     @State private var currentModal: ToolbarSelection?
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         NavigationStack {
@@ -19,6 +20,14 @@ struct SingleCardView: View {
                 .onDisappear(perform: {
                     card.save()
                 })
+                .onChange(
+                    of: scenePhase,
+                    { _, newScenePhase in
+                        if newScenePhase == .inactive {
+                            card.save()
+                        }
+                    }
+                )
         }
     }
 }
