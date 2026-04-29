@@ -50,6 +50,13 @@ extension ImageElement: Codable {
             uiImage = UIImage.error
         }
     }
+
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: ImageElementCodingKeys.self)
+        try container.encode(transform, forKey: .transform)
+        try container.encode(imageFilename, forKey: .imageFilename)
+        try container.encode(frameIndex, forKey: .frameIndex)
+    }
 }
 
 enum ImageElementCodingKeys: CodingKey {
