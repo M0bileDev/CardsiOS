@@ -13,7 +13,12 @@ struct Card: Identifiable {
     var elements: [CardElement] = []
 
     mutating func addElement(uiImage: UIImage) {
-        let element = ImageElement(uiImage: uiImage)
+        let imageFilename = uiImage.save()
+
+        let element = ImageElement(
+            uiImage: uiImage,
+            imageFilename: imageFilename
+        )
         elements.append(element)
     }
 
@@ -46,8 +51,8 @@ struct Card: Identifiable {
         imageElement.frameIndex = frameIndex
         elements[index] = imageElement
     }
-    
-    func save(){
+
+    func save() {
         print("Saving data...")
     }
 }
