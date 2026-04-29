@@ -37,6 +37,10 @@ struct Card: Identifiable {
     }
 
     mutating func remove(_ element: CardElement) {
+        if let element = element as? ImageElement {
+            UIImage.remove(name: element.imageFilename)
+        }
+
         if let index = element.index(in: elements) {
             elements.remove(at: index)
         }
