@@ -63,6 +63,15 @@ struct Card: Identifiable {
 
 extension Card: Codable {
 
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: Card.CardCodingKeys.self)
+        try container.encode(id.uuidString, forKey: .id)
+        let imageElements: [ImageElement] = elements.compactMap {
+            $0 as? ImageElement
+        }
+        try container.encode(imageElements, forKey: .imageElements)
+    }
+
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: Card.CardCodingKeys.self)
         let id = try container.decode(String.self, forKey: .id)
