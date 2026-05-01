@@ -60,3 +60,9 @@ struct Card: Identifiable {
         print("Saving data...")
     }
 }
+
+extension Card: Codable{
+    enum CardCodingKeys: CodingKeys{
+        case id, backgroundColor, imageElements, textElements
+    }
+}
