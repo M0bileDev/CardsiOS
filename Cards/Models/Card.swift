@@ -57,7 +57,15 @@ struct Card: Identifiable {
     }
 
     func save() {
-        print("Saving data...")
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(self)
+            let fileName = "\(id).card"
+            let url = URL.documentsDirectory.appendingPathComponent(fileName)
+            try data.write(to: url)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
 
@@ -83,7 +91,10 @@ extension Card: Codable {
             [ImageElement].self,
             forKey: .imageElements
         )
-        let resolvedColor = try container.decode(Color.Resolved.self, forKey: .backgroundColor)
+        let resolvedColor = try container.decode(
+            Color.Resolved.self,
+            forKey: .backgroundColor
+        )
         backgroundColor = Color(resolvedColor)
     }
 
