@@ -34,6 +34,7 @@ struct Card: Identifiable {
                 addElement(uiImage: image)
             }
         }
+        save()
     }
 
     mutating func remove(_ element: CardElement) {
@@ -44,6 +45,7 @@ struct Card: Identifiable {
         if let index = element.index(in: elements) {
             elements.remove(at: index)
         }
+        save()
     }
 
     mutating func update(_ element: CardElement?, frameIndex: Int) {
