@@ -13,9 +13,7 @@ class CardStore: ObservableObject {
     @Published var selectedElement: CardElement?
 
     init(defaultData: Bool = false) {
-        if defaultData {
-            cards = initialCards
-        }
+        cards = defaultData ? initialCards : load()
     }
 
     func index(for card: Card) -> Int? {
@@ -43,7 +41,7 @@ extension CardStore {
             do {
                 let path = path + "/" + cardFile
                 let data = try Data(contentsOf: URL(fileURLWithPath: path))
-                
+
                 let decoder = JSONDecoder()
                 let card = try decoder.decode(Card.self, from: data)
                 cards.append(card)
