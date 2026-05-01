@@ -70,6 +70,9 @@ extension Card: Codable {
             $0 as? ImageElement
         }
         try container.encode(imageElements, forKey: .imageElements)
+        let environment = EnvironmentValues()
+        let resolvedColors = backgroundColor.resolve(in: environment)
+        try container.encode(resolvedColors, forKey: .backgroundColor)
     }
 
     init(from decoder: any Decoder) throws {
@@ -80,6 +83,8 @@ extension Card: Codable {
             [ImageElement].self,
             forKey: .imageElements
         )
+        let resolvedColor = try container.decode(Color.Resolved.self, forKey: .backgroundColor)
+        backgroundColor = Color(resolvedColor)
     }
 
     enum CardCodingKeys: CodingKey {
