@@ -79,7 +79,11 @@ extension Card: Codable {
         let imageElements: [ImageElement] = elements.compactMap {
             $0 as? ImageElement
         }
+        let textElements: [TextElement] = elements.compactMap {
+            $0 as? TextElement
+        }
         try container.encode(imageElements, forKey: .imageElements)
+        try container.encode(textElements, forKey: .textElements)
         let environment = EnvironmentValues()
         let resolvedColors = backgroundColor.resolve(in: environment)
         try container.encode(resolvedColors, forKey: .backgroundColor)
@@ -92,6 +96,10 @@ extension Card: Codable {
         elements += try container.decode(
             [ImageElement].self,
             forKey: .imageElements
+        )
+        elements += try container.decode(
+            [TextElement].self,
+            forKey: .textElements
         )
         let resolvedColor = try container.decode(
             Color.Resolved.self,
