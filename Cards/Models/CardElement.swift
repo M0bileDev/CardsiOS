@@ -70,3 +70,23 @@ struct TextElement: CardElement {
     var textColor: Color = .black
     var textFont = "Gill Sans"
 }
+
+extension TextElement: Codable {
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(
+            keyedBy: TextElementCodingKeys.self
+        )
+        transform = try container.decode(Transform.self, forKey: .transform)
+        text = try container.decode(String.self, forKey: .text)
+    }
+
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: TextElementCodingKeys.self)
+        try container.encode(transform, forKey: .transform)
+        try container.encode(text, forKey: .text)
+    }
+}
+
+enum TextElementCodingKeys: CodingKey {
+    case text, transform
+}
