@@ -39,16 +39,21 @@ struct CardsListView: View {
     }
 
     var body: some View {
-        list.fullScreenCover(
-            item: $selectedCard,
-            content: { card in
-                if let index = store.index(for: card) {
-                    SingleCardView(card: $store.cards[index])
-                } else {
-                    fatalError("Unable to locate selected card")
+        VStack {
+            list.fullScreenCover(
+                item: $selectedCard,
+                content: { card in
+                    if let index = store.index(for: card) {
+                        SingleCardView(card: $store.cards[index])
+                    } else {
+                        fatalError("Unable to locate selected card")
+                    }
                 }
+            )
+            Button("Add") {
+                selectedCard = store.addCard()
             }
-        )
+        }
     }
 }
 
