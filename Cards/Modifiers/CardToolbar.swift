@@ -15,6 +15,7 @@ struct CardToolbar: ViewModifier {
     @Binding var card: Card
     @State private var stickerImage: UIImage?
     @State private var frameIndex: Int?
+    @State private var textElement: TextElement = TextElement()
 
     var menu: some View {
         Menu(
@@ -78,6 +79,14 @@ struct CardToolbar: ViewModifier {
                                     )
                                 }
                                 frameIndex = nil
+                            })
+                    case .textModal:
+                        TextModal(textElement: $textElement)
+                            .onDisappear(perform: {
+                                if !textElement.text.isEmpty {
+                                    card.addElement(text: textElement)
+                                    textElement = TextElement()
+                                }
                             })
                     default: Text(String(describing: item))
                     }
