@@ -14,3 +14,23 @@ enum Settings {
     static let borderColor: Color = .blue
     static let borderWidth: CGFloat = 5
 }
+
+extension Settings {
+    static func calculateDropOffset(
+        viewScale: CGFloat,
+        location: CGPoint
+    ) -> CGSize {
+        // convert the coordinates to the original (unscaled) card size
+        let originalX = location.x / viewScale
+        let originalY = location.y / viewScale
+
+        //calculate the offset to center of the image on the drop location
+        let offset = CGSize(
+            // adjust by subtracting half of the original card size
+            width: originalX - (Settings.cardSize.width * 0.5),
+            height: originalY - (Settings.cardSize.height * 0.5)
+        )
+
+        return offset
+    }
+}
