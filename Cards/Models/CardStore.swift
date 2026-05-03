@@ -19,11 +19,22 @@ class CardStore: ObservableObject {
     func index(for card: Card) -> Int? {
         cards.firstIndex { $0.id == card.id }
     }
-
+    
     func remove(_ card: Card) {
-        if let index = index(for: card) {
-            cards.remove(at: index)
+        guard let index = index(for: card) else { return }
+        
+        // removes the element images on disk
+        for element in cards[index].elements{
+            cards[index].remove(element)
         }
+        
+        // remove the card image (if there is one)
+        UIImage.remove(name: card.id.uuidString)
+        
+        // remove the card details
+        let path = URL.documentsDirectory.appendingPathComponent("\(card.id.uuidString).card")
+        try? FileManager.default.removeItem(at: path)
+        cards.remove(at: index)
     }
 
     func addCard() -> Card {
