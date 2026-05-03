@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct CardsApp: App {
 
-    @StateObject var store = CardStore(defaultData: false)
+    @StateObject var store = CardStore(defaultData: true)
 
     var body: some Scene {
         WindowGroup {
