@@ -14,7 +14,7 @@ struct CardsListView: View {
 
     private var list: some View {
         ScrollView(showsIndicators: false) {
-            VStack {
+            LazyVGrid(columns: columns, spacing: 30) {
                 ForEach(store.cards) { card in
                     CardThumbnail(card: card)
                         .contextMenu {
@@ -36,6 +36,7 @@ struct CardsListView: View {
                 }
             }
         }
+        .padding(.top, 20)
     }
 
     private var columns: [GridItem] {
@@ -62,8 +63,8 @@ struct CardsListView: View {
                 selectedCard = store.addCard()
             }
         }
-        .background(Color.background)
-        .ignoresSafeArea()
+        .background(Color.background.ignoresSafeArea())
+        
     }
 }
 
