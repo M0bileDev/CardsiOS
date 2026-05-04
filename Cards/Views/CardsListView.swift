@@ -54,6 +54,8 @@ struct CardsListView: View {
                 selectedCard = store.addCard()
             }
         }
+        .background(Color.background)
+        .ignoresSafeArea()
     }
 }
 
