@@ -10,7 +10,20 @@ import SwiftUI
 struct CardsListView: View {
 
     @EnvironmentObject private var store: CardStore
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.verticalSizeClass) var verticalSizeClass
     @State private var selectedCard: Card?
+
+    var thumbnailSize: CGSize {
+        var scale: CGFloat = 1
+        if verticalSizeClass == .regular,
+            horizontalSizeClass == .regular
+        {
+            scale = 1.5
+        }
+
+        return Settings.thumbnailSize * scale
+    }
 
     private var list: some View {
         ScrollView(showsIndicators: false) {
@@ -33,6 +46,10 @@ struct CardsListView: View {
                         .onTapGesture {
                             selectedCard = card
                         }
+                        .frame(
+                            width: thumbnailSize.width,
+                            height: thumbnailSize.height
+                        )
                 }
             }
         }
@@ -42,7 +59,7 @@ struct CardsListView: View {
     private var columns: [GridItem] {
         [
             GridItem(
-                .adaptive(minimum: Settings.thumbnailSize.width)
+                .adaptive(minimum: thumbnailSize.width)
             )
         ]
     }
@@ -64,7 +81,7 @@ struct CardsListView: View {
             }
         }
         .background(Color.background.ignoresSafeArea())
-        
+
     }
 }
 
