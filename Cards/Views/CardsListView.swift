@@ -38,6 +38,14 @@ struct CardsListView: View {
         }
     }
 
+    private var columns: [GridItem] {
+        [
+            GridItem(
+                .adaptive(minimum: Settings.thumbnailSize.width)
+            )
+        ]
+    }
+
     var body: some View {
         VStack {
             list.fullScreenCover(
