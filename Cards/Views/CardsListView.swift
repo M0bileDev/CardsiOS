@@ -79,6 +79,30 @@ struct CardsListView: View {
         .background(Color.bar)
     }
 
+    private var initialView: some View {
+        VStack {
+            let card = Card(
+                backgroundColor: Color(
+                    uiColor: .systemBackground
+                )
+            )
+            ZStack {
+                CardThumbnail(card: card)
+                Image(
+                    systemName: "plus.circle.fill",
+                ).font(.largeTitle)
+            }
+            .onTapGesture {
+                selectedCard = store.addCard()
+            }
+        }
+        .frame(
+            width: thumbnailSize.width * 1.2,
+            height: thumbnailSize.height * 1.2
+        )
+        .padding(.bottom, 20)
+    }
+
     var body: some View {
         VStack {
             list.fullScreenCover(
