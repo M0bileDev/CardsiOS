@@ -115,6 +115,15 @@ struct CardsListView: View {
                     }
                 }
             )
+            .overlay(content: {
+                if store.cards.isEmpty{
+                    ContentUnavailableView{
+                        initialView
+                    } description: {
+                        Text("Tap the plus button to add a card")
+                    }
+                }
+            })
             createButton
         }
         .background(Color.background.ignoresSafeArea())
@@ -124,5 +133,5 @@ struct CardsListView: View {
 
 #Preview {
     CardsListView()
-        .environmentObject(CardStore(defaultData: true))
+        .environmentObject(CardStore(defaultData: false))
 }
