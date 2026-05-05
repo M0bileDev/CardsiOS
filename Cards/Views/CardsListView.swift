@@ -64,6 +64,21 @@ struct CardsListView: View {
         ]
     }
 
+    private var createButton: some View {
+        Button(
+            action: {
+                selectedCard = store.addCard()
+            },
+            label: {
+                Label("Create card", systemImage: "plus")
+                    .frame(maxWidth: .infinity)
+                    .padding([.top, .bottom], 10)
+            }
+        )
+        .font(.system(size: 16, weight: .bold))
+        .background(Color.bar)
+    }
+
     var body: some View {
         VStack {
             list.fullScreenCover(
@@ -76,9 +91,7 @@ struct CardsListView: View {
                     }
                 }
             )
-            Button("Add") {
-                selectedCard = store.addCard()
-            }
+            createButton
         }
         .background(Color.background.ignoresSafeArea())
 
