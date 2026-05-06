@@ -77,6 +77,7 @@ struct CardsListView: View {
         )
         .font(.system(size: 16, weight: .bold))
         .background(Color.bar)
+        .accentColor(.white)
     }
 
     private var initialView: some View {
