@@ -29,11 +29,16 @@ struct SingleCardView: View {
                             }
                         }
                     )
+                // calculate the size of the card view
                     .frame(
-                        width: Settings.cardSize.width,
-                        height: Settings.cardSize.height
+                        width: Settings.calculateSize(proxy.size).width,
+                        height: Settings.calculateSize(proxy.size).height
                     )
-                    .scaleEffect(0.8)
+                // this will center the card view in the geometry reader
+                    .frame(
+                        maxWidth: .infinity,
+                        maxHeight: .infinity
+                    )
             }
 
         }
