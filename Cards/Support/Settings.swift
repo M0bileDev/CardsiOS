@@ -48,4 +48,9 @@ extension Settings {
 
         return newSize
     }
+
+    static func calculateScale(_ size: CGSize) -> CGFloat {
+        let newSize = calculateSize(size)
+        return newSize.width / Settings.cardSize.width
+    }
 }
