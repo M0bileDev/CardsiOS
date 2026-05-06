@@ -15,19 +15,27 @@ struct SingleCardView: View {
 
     var body: some View {
         NavigationStack {
-            CardDetailView(card: $card)
-                .cardToolbar(modal: $currentModal, card: $card)
-                .onDisappear(perform: {
-                    card.save()
-                })
-                .onChange(
-                    of: scenePhase,
-                    { _, newScenePhase in
-                        if newScenePhase == .inactive {
-                            card.save()
+            GeometryReader { proxy in
+                CardDetailView(card: $card)
+                    .cardToolbar(modal: $currentModal, card: $card)
+                    .onDisappear(perform: {
+                        card.save()
+                    })
+                    .onChange(
+                        of: scenePhase,
+                        { _, newScenePhase in
+                            if newScenePhase == .inactive {
+                                card.save()
+                            }
                         }
-                    }
-                )
+                    )
+                    .frame(
+                        width: Settings.cardSize.width,
+                        height: Settings.cardSize.height
+                    )
+                    .scaleEffect(0.8)
+            }
+
         }
     }
 }
