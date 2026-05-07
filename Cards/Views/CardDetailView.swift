@@ -11,6 +11,7 @@ struct CardDetailView: View {
 
     @EnvironmentObject var store: CardStore
     @Binding var card: Card
+    var viewScale: CGFloat = 1.0
 
     var body: some View {
         ZStack {
@@ -31,7 +32,10 @@ struct CardDetailView: View {
                             store.selectedElement = element
                         }
                         .elementContextMenu(card: $card, element: $element)
-                        .resizableView(transform: $element.transform)
+                        .resizableView(
+                            transform: $element.transform,
+                            viewScale: viewScale
+                        )
                         .frame(
                             width: element.transform.size.width,
                             height: element.transform.size.height
