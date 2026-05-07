@@ -16,7 +16,7 @@ struct SingleCardView: View {
     var body: some View {
         NavigationStack {
             GeometryReader { proxy in
-                CardDetailView(card: $card)
+                CardDetailView(card: $card, viewScale: Settings.calculateScale(proxy.size))
                     .cardToolbar(modal: $currentModal, card: $card)
                     .onDisappear(perform: {
                         card.save()
