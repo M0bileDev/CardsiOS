@@ -49,10 +49,13 @@ struct CardDetailView: View {
             .dropDestination(for: CustomTransfer.self) {
                 items,
                 location in
-                print(location)
+                let offset = Settings.calculateDropOffset(
+                    viewScale: viewScale,
+                    location: location
+                )
                 Task {
                     await MainActor.run {
-                        card.addElements(from: items)
+                        card.addElements(from: items, offset: offset)
                     }
                 }
                 return !items.isEmpty
