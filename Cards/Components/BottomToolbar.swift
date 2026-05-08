@@ -100,7 +100,12 @@ struct ToolbarButton: View {
     }
 }
 
-#Preview {
+#Preview("Test Portrait", traits: .portrait){
+    BottomToolbar(modal: .constant(.stickerModal), card: .constant(Card()))
+        .environmentObject(CardStore())
+}
+
+#Preview("Test Landscape", traits: .landscapeLeft){
     BottomToolbar(modal: .constant(.stickerModal), card: .constant(Card()))
         .environmentObject(CardStore())
 }
