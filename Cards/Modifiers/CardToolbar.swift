@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CardToolbar: ViewModifier {
 
+    @Environment(\.verticalSizeClass) var verticalSizeClass
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var store: CardStore
     @Binding var currentModal: ToolbarSelection?
@@ -32,7 +33,7 @@ struct CardToolbar: ViewModifier {
                             if let strings = UIPasteboard.general.strings {
                                 for text in strings {
                                     card.addElement(
-                                        text: TextElement(text: text)
+                                        text: text
                                     )
                                 }
                             }
@@ -51,7 +52,14 @@ struct CardToolbar: ViewModifier {
                 Label("Add", systemImage: "ellipsis.circle")
             }
         )
+    }
 
+    private var bottomToolbarHeight: CGFloat {
+        return if verticalSizeClass == .compact {
+            50
+        } else {
+            70
+        }
     }
 
     func body(content: Content) -> some View {
@@ -84,7 +92,7 @@ struct CardToolbar: ViewModifier {
                         TextModal(textElement: $textElement)
                             .onDisappear(perform: {
                                 if !textElement.text.isEmpty {
-                                    card.addElement(text: textElement)
+                                    card.addElement(text: textElement.text)
                                     textElement = TextElement()
                                 }
                             })
@@ -111,6 +119,9 @@ struct CardToolbar: ViewModifier {
                     BottomToolbar(
                         modal: $currentModal,
                         card: $card
+                    )
+                    .frame(
+                        height: bottomToolbarHeight
                     )
                 }
 
