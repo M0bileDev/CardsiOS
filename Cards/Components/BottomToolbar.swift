@@ -64,7 +64,7 @@ struct ToolbarButton: View {
                 .frame(height: 35)
             Text(text)
         }
-        .padding(.top)
+        .padding(.top, 5)
     }
 
     func compactView(
@@ -75,7 +75,8 @@ struct ToolbarButton: View {
                 .font(.largeTitle)
                 .frame(height: 35)
         }
-        .padding(.top)
+        .padding(.top, 5)
+        .padding(.bottom, 5)
     }
 
     private let modalButton:
