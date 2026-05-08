@@ -51,6 +51,33 @@ struct BottomToolbar: View {
 }
 
 struct ToolbarButton: View {
+
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+
+    func regularView(
+        imageName: String,
+        text: String
+    ) -> some View {
+        VStack {
+            Image(systemName: imageName)
+                .font(.largeTitle)
+                .frame(height: 35)
+            Text(text)
+        }
+        .padding(.top)
+    }
+
+    func compactView(
+        imageName: String
+    ) -> some View {
+        VStack {
+            Image(systemName: imageName)
+                .font(.largeTitle)
+                .frame(height: 35)
+        }
+        .padding(.top)
+    }
+
     private let modalButton:
         [ToolbarSelection: (text: String, imageName: String)] = [
             .photoModal: ("Photos", "photo"),
@@ -64,13 +91,11 @@ struct ToolbarButton: View {
         if let text = modalButton[modal]?.text,
             let imageName = modalButton[modal]?.imageName
         {
-            VStack {
-                Image(systemName: imageName)
-                    .font(.largeTitle)
-                    .frame(height: 35)
-                Text(text)
+            if verticalSizeClass == .compact {
+                compactView(imageName: imageName)
+            } else {
+                regularView(imageName: imageName, text: text)
             }
-            .padding(.top)
         }
     }
 }
