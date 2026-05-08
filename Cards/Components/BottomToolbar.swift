@@ -12,13 +12,16 @@ struct BottomToolbar: View {
     @EnvironmentObject var store: CardStore
     @Binding var modal: ToolbarSelection?
     @Binding var card: Card
-    
-    func defaultButton(_ selection: ToolbarSelection) -> some View{
-        Button(action: {
-            modal = selection
-        }, label: {
-            ToolbarButton(modal: selection)
-        })
+
+    func defaultButton(_ selection: ToolbarSelection) -> some View {
+        Button(
+            action: {
+                modal = selection
+            },
+            label: {
+                ToolbarButton(modal: selection)
+            }
+        )
     }
 
     var body: some View {
@@ -35,8 +38,8 @@ struct BottomToolbar: View {
                     case .frameModal:
                         defaultButton(selection)
                             .disabled(
-                                store.selectedElement == nil ||
-                                !(store.selectedElement is ImageElement)
+                                store.selectedElement == nil
+                                    || !(store.selectedElement is ImageElement)
                             )
                     default:
                         defaultButton(selection)
@@ -64,14 +67,13 @@ struct ToolbarButton: View {
             VStack {
                 Image(systemName: imageName)
                     .font(.largeTitle)
+                    .frame(height: 35)
                 Text(text)
             }
             .padding(.top)
         }
     }
 }
-
-
 
 #Preview {
     BottomToolbar(modal: .constant(.stickerModal), card: .constant(Card()))
