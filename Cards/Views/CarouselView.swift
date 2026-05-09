@@ -8,8 +8,16 @@
 import SwiftUI
 
 struct CarouselView: View {
+
+    let thumbnailScale: CGFloat = 0.7
+
     var body: some View {
         Text( /*@START_MENU_TOKEN@*/"Hello, World!" /*@END_MENU_TOKEN@*/)
+    }
+
+    func getCardSize(proxySize: CGSize) -> CGSize {
+        let cardSzie = Settings.calculateSize(proxySize)
+        return cardSzie * thumbnailScale
     }
 
     func getOrCreateCardView(card: Card) -> some View {
