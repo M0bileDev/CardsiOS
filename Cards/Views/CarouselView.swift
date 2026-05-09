@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CarouselView: View {
 
+    @EnvironmentObject var store: CardStore
+    @Binding var selectedCard: Card?
     let thumbnailScale: CGFloat = 0.7
 
     var body: some View {
