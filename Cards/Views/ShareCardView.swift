@@ -43,6 +43,6 @@ struct ShareCardView: View {
     }
 }
 
-//#Preview {
-//    ShareCardView()
-//}
+#Preview {
+    ShareCardView(card: initialCards[0])
+}
