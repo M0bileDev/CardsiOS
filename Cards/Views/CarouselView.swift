@@ -12,6 +12,18 @@ struct CarouselView: View {
         Text( /*@START_MENU_TOKEN@*/"Hello, World!" /*@END_MENU_TOKEN@*/)
     }
 
+    func getOrCreateCardView(card: Card) -> some View {
+        Group {
+            if let image = loadCardImage(card: card) {
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            } else {
+                card.backgroundColor
+            }
+        }
+    }
+
     func loadCardImage(card: Card) -> Image? {
         let uiImage = UIImage.load(name: card.id.uuidString)
         if uiImage != .error {
