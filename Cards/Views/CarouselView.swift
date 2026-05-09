@@ -65,5 +65,8 @@ struct CarouselView: View {
 }
 
 #Preview {
-    CarouselView()
+    CarouselView(selectedCard: .constant(Card()))
+        .environmentObject(
+            CardStore(defaultData: true)
+        )
 }
