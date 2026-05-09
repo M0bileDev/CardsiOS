@@ -11,6 +11,14 @@ struct CarouselView: View {
     var body: some View {
         Text( /*@START_MENU_TOKEN@*/"Hello, World!" /*@END_MENU_TOKEN@*/)
     }
+
+    func loadCardImage(card: Card) -> Image? {
+        let uiImage = UIImage.load(name: card.id.uuidString)
+        if uiImage != .error {
+            return Image(uiImage: uiImage)
+        }
+        return nil
+    }
 }
 
 #Preview {
