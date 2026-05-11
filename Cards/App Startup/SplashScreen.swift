@@ -9,7 +9,26 @@ import SwiftUI
 
 struct SplashScreen: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text( /*@START_MENU_TOKEN@*/"Hello, World!" /*@END_MENU_TOKEN@*/)
+    }
+}
+
+func createCardView(letter: String, color: String) -> some View {
+    ZStack {
+        RoundedRectangle(cornerRadius: 25)
+            .shadow(radius: 3)
+            .frame(
+                width: 120,
+                height: 160
+            )
+            .foregroundStyle(.white)
+        Text(
+            letter
+        )
+        .fontWeight(.bold)
+        .scalableText()
+        .foregroundStyle(Color(color))
+        .frame(width: 80)
     }
 }
 
