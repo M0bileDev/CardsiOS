@@ -32,6 +32,20 @@ func createCardView(letter: String, color: String) -> some View {
     }
 }
 
+private struct SplashAnimation: ViewModifier {
+    @State private var animating = true
+    let finalYPosition: CGFloat
+    let delay: Double
+
+    func body(content: Content) -> some View {
+        content
+            .offset(y: animating ? -700 : finalYPosition)
+            .onAppear {
+                animating = false
+            }
+    }
+}
+
 #Preview {
     SplashScreen()
 }
