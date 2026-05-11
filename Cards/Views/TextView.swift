@@ -10,6 +10,7 @@ import SwiftUI
 struct TextView: View {
 
     @Binding var color: Color
+    @Binding var font: String
 
     var colorSelector: some View {
         ForEach(1..<8) { index in
@@ -42,6 +43,29 @@ struct TextView: View {
             .onTapGesture {
                 withAnimation {
                     color = Color("appColor\(index)")
+                }
+            }
+        }
+    }
+
+    var fontsSelector: some View {
+        ForEach(0..<AppFonts.fonts.count, id: \.self) { index in
+            ZStack {
+                Circle()
+                    .foregroundStyle(.primary)
+                    .colorInvert()
+                Text("Aa")
+                    .font(.custom(AppFonts.fonts[index], size: 20))
+                    .fontWeight(.heavy)
+                    .foregroundStyle(.primary)
+            }
+            .frame(
+                width: AppFonts.fonts[index] == font ? 50 : 40,
+                height: AppFonts.fonts[index] == font ? 50 : 40
+            )
+            .onTapGesture {
+                withAnimation {
+                    font = AppFonts.fonts[index]
                 }
             }
         }
