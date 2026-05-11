@@ -72,7 +72,27 @@ struct TextView: View {
     }
 
     var body: some View {
-        Text( /*@START_MENU_TOKEN@*/"Hello, World!" /*@END_MENU_TOKEN@*/)
+        VStack {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    fontsSelector
+                }
+                .frame(
+                    maxWidth: .infinity
+                )
+                .frame(
+                    height: 100
+                )
+            }
+            HStack {
+                colorSelector
+            }
+        }
+        .frame(
+            maxWidth: .infinity
+        )
+        .padding([.top, .bottom])
+        .background(Color.primary)
     }
 }
 
