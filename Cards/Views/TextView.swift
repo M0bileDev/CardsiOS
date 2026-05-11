@@ -77,5 +77,8 @@ struct TextView: View {
 }
 
 #Preview {
-    TextView()
+    TextView(
+        color: .constant(Color("appColor2")),
+        font: .constant("San Fransisco")
+    )
 }
