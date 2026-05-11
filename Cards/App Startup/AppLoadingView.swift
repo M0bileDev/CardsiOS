@@ -23,4 +23,6 @@ struct AppLoadingView: View {
 
 #Preview {
     AppLoadingView()
+        .environmentObject(
+          CardStore(defaultData: true))
 }
