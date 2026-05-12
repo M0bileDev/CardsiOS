@@ -46,6 +46,17 @@ private struct SplashAnimation: ViewModifier {
     }
 }
 
+extension View {
+    fileprivate func splashAnimation(
+        finalYPosition: CGFloat,
+        delay: Double
+    ) -> some View {
+        modifier(
+            SplashAnimation(finalYPosition: finalYPosition, delay: delay)
+        )
+    }
+}
+
 #Preview {
     SplashScreen()
 }
