@@ -56,16 +56,16 @@ private struct SplashAnimation: ViewModifier {
             .rotationEffect(
                 animating ? .zero : Angle(degrees: Double.random(in: -10...10))
             )
+            .animation(
+                Animation.snappy(
+                    duration: 0.5,
+                    extraBounce: 0.2
+                )
+                .delay(delay),
+                value: animating
+            )
             .onAppear {
-                withAnimation(
-                    Animation.bouncy(
-                        duration: 1.5,
-                        extraBounce: 0.2
-                    )
-                    .delay(delay)
-                ) {
-                    animating = false
-                }
+                animating = false
             }
     }
 }
