@@ -42,7 +42,9 @@ private struct SplashAnimation: ViewModifier {
         content
             .offset(y: animating ? -700 : finalYPosition)
             .onAppear {
-                animating = false
+                withAnimation{
+                    animating = false
+                }
             }
     }
 }
