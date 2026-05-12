@@ -9,8 +9,20 @@ import SwiftUI
 
 struct SplashScreen: View {
     var body: some View {
-        createCardView(letter: "C", color: "appColor7")
-            .splashAnimation(finalYPosition: 200, delay: 0)
+        ZStack {
+            createCardView(letter: "S", color: "appColor1")
+                .splashAnimation(finalYPosition: 240, delay: 0)
+            createCardView(letter: "D", color: "appColor2")
+                .splashAnimation(finalYPosition: 120, delay: 0.2)
+            createCardView(letter: "R", color: "appColor3")
+                .splashAnimation(finalYPosition: 0, delay: 0.4)
+            createCardView(letter: "A", color: "appColor6")
+                .splashAnimation(finalYPosition: -120, delay: 0.6)
+            createCardView(letter: "C", color: "appColor7")
+                .splashAnimation(finalYPosition: -240, delay: 0.8)
+
+        }
+
     }
 }
 
@@ -42,7 +54,7 @@ private struct SplashAnimation: ViewModifier {
         content
             .offset(y: animating ? -700 : finalYPosition)
             .onAppear {
-                withAnimation{
+                withAnimation {
                     animating = false
                 }
             }
