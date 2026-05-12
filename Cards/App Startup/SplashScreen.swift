@@ -54,7 +54,7 @@ private struct SplashAnimation: ViewModifier {
         content
             .offset(y: animating ? -700 : finalYPosition)
             .onAppear {
-                withAnimation(Animation.easeOut(duration: 1.5).delay(delay)) {
+                withAnimation(Animation.bouncy.delay(delay)) {
                     animating = false
                 }
             }
