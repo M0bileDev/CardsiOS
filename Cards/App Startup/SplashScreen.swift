@@ -10,6 +10,7 @@ import SwiftUI
 struct SplashScreen: View {
     var body: some View {
         createCardView(letter: "C", color: "appColor7")
+            .splashAnimation(finalYPosition: 200, delay: 0)
     }
 }
 
