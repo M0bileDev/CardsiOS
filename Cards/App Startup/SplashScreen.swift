@@ -53,11 +53,17 @@ private struct SplashAnimation: ViewModifier {
     func body(content: Content) -> some View {
         content
             .offset(y: animating ? -700 : finalYPosition)
+            .rotationEffect(
+                animating ? .zero : Angle(degrees: Double.random(in: -10...10))
+            )
             .onAppear {
-                withAnimation(Animation.bouncy(
-                    duration: 1.5,
-                    extraBounce: 0.4)
-                    .delay(delay)) {
+                withAnimation(
+                    Animation.bouncy(
+                        duration: 1.5,
+                        extraBounce: 0.2
+                    )
+                    .delay(delay)
+                ) {
                     animating = false
                 }
             }
