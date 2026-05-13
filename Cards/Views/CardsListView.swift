@@ -13,6 +13,8 @@ struct CardsListView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
     @State private var selectedCard: Card?
+    //holds the identity of the current view
+    @Namespace private var namespace
 
     var thumbnailSize: CGSize {
         var scale: CGFloat = 1
@@ -111,14 +113,17 @@ struct CardsListView: View {
                 content: { card in
                     if let index = store.index(for: card) {
                         SingleCardView(card: $store.cards[index])
+                            .navigationTransition(
+                                .zoom(sourceID: card.id, in: namespace)
+                            )
                     } else {
                         fatalError("Unable to locate selected card")
                     }
                 }
             )
             .overlay(content: {
-                if store.cards.isEmpty{
-                    ContentUnavailableView{
+                if store.cards.isEmpty {
+                    ContentUnavailableView {
                         initialView
                     } description: {
                         Text("Tap the plus button to add a card")
