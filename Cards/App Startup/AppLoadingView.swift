@@ -22,6 +22,7 @@ struct AppLoadingView: View {
                 }
         } else {
             CardsListView()
+                .transition(.slide)
         }
     }
 }
