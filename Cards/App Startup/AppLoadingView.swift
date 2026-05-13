@@ -23,10 +23,7 @@ struct AppLoadingView: View {
         } else {
             CardsListView()
                 .transition(
-                    .asymmetric(
-                        insertion: .move(edge: Edge.trailing),
-                        removal: .scale
-                    )
+                    .scale(scale: 0, anchor: .top)
                 )
         }
     }
