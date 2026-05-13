@@ -117,6 +117,7 @@ struct CardsListView: View {
                             .navigationTransition(
                                 .zoom(sourceID: card.id, in: namespace)
                             )
+                            .interactiveDismissDisabled(true)
                     } else {
                         fatalError("Unable to locate selected card")
                     }
