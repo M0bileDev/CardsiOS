@@ -52,6 +52,7 @@ struct CardsListView: View {
                             width: thumbnailSize.width,
                             height: thumbnailSize.height
                         )
+                        .matchedTransitionSource(id: card.id, in: namespace)
                 }
             }
         }
