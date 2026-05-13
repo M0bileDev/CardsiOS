@@ -12,11 +12,27 @@ enum ListState {
 }
 
 struct ListSelection: View {
+
+    @Binding var listState: ListState
+
     var body: some View {
-        Text( /*@START_MENU_TOKEN@*/"Hello, World!" /*@END_MENU_TOKEN@*/)
+        Picker(
+            selection: $listState,
+            content: {
+                Image(systemName: "square.grid.2x2.fill").tag(ListState.list)
+                Image(systemName: "rectangle.stack.fill").tag(
+                    ListState.carousel
+                )
+            },
+            label: {
+                Text("")
+            }
+        )
+        .pickerStyle(.segmented)
+        .frame(width: 200)
     }
 }
 
-#Preview {
-    ListSelection()
+#Preview(traits: .sizeThatFitsLayout) {
+    ListSelection(listState: .constant(.list))
 }
