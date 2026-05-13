@@ -111,7 +111,14 @@ struct CardsListView: View {
     var body: some View {
         VStack {
             ListSelection(listState: $listState)
-            list.fullScreenCover(
+            Group {
+                switch listState {
+                case .list:
+                    list
+                case .carousel:
+                    CarouselView(selectedCard: $selectedCard)
+                }
+            }.fullScreenCover(
                 item: $selectedCard,
                 content: { card in
                     if let index = store.index(for: card) {
