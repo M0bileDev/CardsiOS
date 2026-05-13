@@ -15,6 +15,7 @@ struct CardsListView: View {
     @State private var selectedCard: Card?
     //holds the identity of the current view
     @Namespace private var namespace
+    @State private var listState = ListState.list
 
     var thumbnailSize: CGSize {
         var scale: CGFloat = 1
@@ -109,6 +110,7 @@ struct CardsListView: View {
 
     var body: some View {
         VStack {
+            ListSelection(listState: $listState)
             list.fullScreenCover(
                 item: $selectedCard,
                 content: { card in
