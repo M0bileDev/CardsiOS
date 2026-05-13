@@ -22,7 +22,12 @@ struct AppLoadingView: View {
                 }
         } else {
             CardsListView()
-                .transition(.slide)
+                .transition(
+                    .asymmetric(
+                        insertion: .move(edge: Edge.trailing),
+                        removal: .scale
+                    )
+                )
         }
     }
 }
