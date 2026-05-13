@@ -15,6 +15,11 @@ struct AppLoadingView: View {
         if showSplash {
             SplashScreen()
                 .ignoresSafeArea()
+                .onAppear {
+                    withAnimation(.linear(duration: 1.5)) {
+                        showSplash = false
+                    }
+                }
         } else {
             CardsListView()
         }
@@ -24,5 +29,6 @@ struct AppLoadingView: View {
 #Preview {
     AppLoadingView()
         .environmentObject(
-          CardStore(defaultData: true))
+            CardStore(defaultData: true)
+        )
 }
