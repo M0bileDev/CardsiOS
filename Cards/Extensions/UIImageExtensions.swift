@@ -14,12 +14,12 @@ extension UIImage {
 
     /**
      Saves the image as a PNG file to the app's documents directory.
-     
+    
      It first resizes the image if it's too large via resizeLargeImage(),
      then determines the filename, either using the provided name or generating a new UUID string.
-     
+    
      It converts the image to PNG data and writes it to disk, logging any errors to the console.
-     
+    
      Finally, it returns the filename (without the .png extension), which can later be used with the load method to retrieve the image.
      */
     func save(to name: String? = nil) -> String {
@@ -142,5 +142,20 @@ extension UIImage {
         }
 
         return CGSize(width: width, height: height)
+    }
+}
+
+extension UIImage {
+    
+    //require main dispatch queue -> creates a contract for the rest of the callers
+    @MainActor static func screenshot(
+        card: Card,
+        size: CGSize
+    ) -> UIImage {
+        let shareCardView = ShareCardView(card: card)
+        let scaledContent = shareCardView.scaledContent(size: size)
+        let imageRenderer = ImageRenderer(content: scaledContent)
+
+        return imageRenderer.uiImage ?? UIImage.error
     }
 }
