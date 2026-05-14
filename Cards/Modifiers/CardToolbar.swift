@@ -123,6 +123,17 @@ struct CardToolbar: ViewModifier {
                             size: Settings.cardSize
                         )
                         let image = Image(uiImage: uiImage)
+                        ShareLink(
+                            // screen capture image
+                            item: image,
+                            preview: SharePreview(
+                                "Card",
+                                // preview image
+                                image: image
+                            )
+                        ) {
+                            Image(systemName: "square.and.arrow.up")
+                        }
                     }
                 )
                 ToolbarItem(placement: .bottomBar) {
