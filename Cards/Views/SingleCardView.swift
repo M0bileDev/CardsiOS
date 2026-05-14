@@ -16,29 +16,38 @@ struct SingleCardView: View {
     var body: some View {
         NavigationStack {
             GeometryReader { proxy in
-                CardDetailView(card: $card, viewScale: Settings.calculateScale(proxy.size))
-                    .cardToolbar(modal: $currentModal, card: $card)
-                    .onDisappear(perform: {
-                        card.save()
-                    })
-                    .onChange(
-                        of: scenePhase,
-                        { _, newScenePhase in
-                            if newScenePhase == .inactive {
-                                card.save()
-                            }
+                CardDetailView(
+                    card: $card,
+                    viewScale: Settings.calculateScale(proxy.size)
+                )
+                .cardToolbar(modal: $currentModal, card: $card)
+                .onDisappear(perform: {
+                    card.save()
+                    let image = UIImage.screenshot(
+                        card: card,
+                        size: Settings.cardSize * 0.2
+                    )
+                    image.save(to: card.id.uuidString)
+
+                })
+                .onChange(
+                    of: scenePhase,
+                    { _, newScenePhase in
+                        if newScenePhase == .inactive {
+                            card.save()
                         }
-                    )
+                    }
+                )
                 // calculate the size of the card view
-                    .frame(
-                        width: Settings.calculateSize(proxy.size).width,
-                        height: Settings.calculateSize(proxy.size).height
-                    )
+                .frame(
+                    width: Settings.calculateSize(proxy.size).width,
+                    height: Settings.calculateSize(proxy.size).height
+                )
                 // this will center the card view in the geometry reader
-                    .frame(
-                        maxWidth: .infinity,
-                        maxHeight: .infinity
-                    )
+                .frame(
+                    maxWidth: .infinity,
+                    maxHeight: .infinity
+                )
             }
 
         }
