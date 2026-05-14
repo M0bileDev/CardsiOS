@@ -115,6 +115,16 @@ struct CardToolbar: ViewModifier {
                         }
                     }
                 )
+                ToolbarItem(
+                    placement: .topBarLeading,
+                    content: {
+                        let uiImage = UIImage.screenshot(
+                            card: card,
+                            size: Settings.cardSize
+                        )
+                        let image = Image(uiImage: uiImage)
+                    }
+                )
                 ToolbarItem(placement: .bottomBar) {
                     BottomToolbar(
                         modal: $currentModal,
